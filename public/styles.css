@@ -1,0 +1,577 @@
+.text-box {
+
+    margin-top: 100px;
+    font-family: "Archivo Black", sans-serif;
+    font-weight: bolder;
+    padding-top: 80px;
+    padding-bottom: 10px;
+    background-color: #181818;
+    color: #F5F5F7;
+    padding: 10px 15px;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: #F5F5F7;
+    color: white;
+}
+
+.nav-left {
+    flex: 1;
+}
+
+.nav-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-center .logo {
+    height: 80px;
+    width: 80px;
+}
+
+.nav-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.login-btn {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-family: "Anonymous Pro", monospace;
+}
+
+.login-btn:hover {
+    background: white;
+    color: black;
+}
+
+body {
+    font-family: 'Lufga', Arial, Helvetica, sans-serif,;
+    text-align: center;
+    background-color: #e5e7eb;
+    background-image: url("assets/background.jpg");
+    background-repeat: repeat;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 1000; 
+    display: none; 
+  }
+  .wrapper.active-popup {
+    z-index: 1001;
+    position: relative;
+  }
+  
+header {
+    background: #d5d5d5;
+    color: #fff;
+    padding: 1px;
+    border-radius: 20px;
+}
+nav a {
+    color: white;
+    margin: 0 10px;
+}
+
+.navigation a {
+    position: relative;
+    font-size: 1.1em;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+    font-family: "Anonymous Pro", monospace;
+  }
+  
+.navigation .btnLogin-popup{
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    background-color: rgba(0,0,0,var(--tw-bg-opacity));
+    border-radius: 16px;
+    color: rgba(255,255,255,var(--tw-text-opacity));
+    font-size: 18px;
+    line-height: 1.1;
+    padding: .75rem 1.25rem;
+    text-align: center;
+    -webkit-transition-duration: .15s;
+    transition-duration: .15s;
+    -webkit-transition-property: all;
+    transition-property: all;
+    font-family: "Anonymous Pro", monospace;
+    -webkit-transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-timing-function: cubic-bezier(.4,0,.2,1)
+}
+
+.navigation .btnLogin-popup:focus {
+    background: #0056b3;
+}
+
+.navigation .btnLogin-popup:hover:not(:disabled) {
+    --tw-bg-opacity: 1;
+    background: #0056b3;
+}
+
+
+.wrapper {
+    display: none;
+    margin-top: 5%;
+    margin-left: 40%;
+    position: absolute;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid #ffffff;
+    font-family: "Anonymous Pro", monospace;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: scale(0);
+    transition: transform .5s ease, height .2s ease;
+}
+  
+.wrapper.active-popup {
+    display: flex;
+    transform: scale(1);
+}
+  
+.wrapper.active {
+    height: 520px;
+}
+  
+  
+.wrapper .form-box {
+    width: 80%;
+    padding: 40px;
+}
+  
+.wrapper .form-box.login {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+  
+.wrapper.active .form-box.login {
+    transition: none;
+    transform: translateX(-400px);
+}
+  
+.wrapper .form-box.register {
+    position: absolute;
+    transform: translateX(400px);
+    margin-top: 50px;
+    margin-bottom: 60px;
+}
+  
+.wrapper.active .form-box.register {
+    position: absolute;
+    transition: none;
+    transform: translateX(0);
+    margin-top: 50px;
+    margin-bottom: 60px;
+}
+  
+.wrapper .icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #0c0c0c;
+    font-size: 2em;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 18px;
+    cursor: pointer;
+    z-index: 1;
+}
+  
+.form-box h2 {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: -20px;
+    font-family: "Anonymous Pro", monospace;
+}
+  
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+    font-family: "Anonymous Pro", monospace;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    font-weight: 500;
+    color: #666;
+    pointer-events: none;
+    transition: 0.3s ease-in-out;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    text-align: right;
+    background: rgba(255, 255, 255, 0.8);
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-weight: 600;
+    font-family: "Anonymous Pro", monospace;
+    text-indent: 10px;
+    padding-left: 20px; 
+    padding-top: 10px; 
+    text-align: left;
+}
+
+.input-box input::placeholder {
+    text-align: right; 
+    padding-right: 10px;
+}
+
+.input-box input:focus::placeholder {
+    color: transparent;
+}
+
+.input-box input:focus + label,
+.input-box input:not(:placeholder-shown) + label {
+    top: 5px;
+    font-size: 0.8em;
+    color: #333;
+}
+  
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    line-height: 57px;
+}
+  
+.remember-forgot {
+    font-size: .9em;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+  
+.remember-forgot label input {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+  
+.remember-forgot a {
+    text-decoration: none;
+    padding-top: 5px;
+    color: #000;
+    font-weight: bold;
+}
+  
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+  
+.btn {
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    background-color: rgba(0,0,0,var(--tw-bg-opacity));
+    border-radius: 16px;
+    color: rgba(255,255,255,var(--tw-text-opacity));
+    font-family: "Anonymous Pro", monospace;
+    font-size: 18px;
+    line-height: 1.1;
+    padding: .75rem 1.25rem;
+    text-align: center;
+    -webkit-transition-duration: .15s;
+    transition-duration: .15s;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -webkit-transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-timing-function: cubic-bezier(.4,0,.2,1)
+    
+} 
+
+.btn:focus {
+    background: #0056b3;
+}
+
+.btn:hover:not(:disabled) {
+    --tw-bg-opacity: 1;
+    background-color: rgba(36,36,36,var(--tw-bg-opacity))
+}
+  
+.login-register {
+    font-size: .9em;
+    text-align:center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+    font-family: "Anonymous Pro", monospace;
+}
+  
+.login-register p a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: "Anonymous Pro", monospace;
+}
+  
+.login-register p a:hover {
+    text-decoration: underline;
+}
+  
+.btn-logout {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #ffffff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #ffffff;
+    font-weight: 500;
+    display: none;
+    font-family: "Anonymous Pro", monospace;
+}
+  
+.btn-logout:hover {
+    background: #06E3AB;
+    color: #000;
+}
+
+
+.workoutForm {
+    background: #F5F5F7;
+    padding: 20px;
+    padding-top: 50px;
+    margin: 20px auto;
+    width: 666px;
+    border-radius: 1px;
+    font-family: "Anonymous Pro", monospace;
+    border-color: #000000;
+    border-style: solid;
+}
+
+.form-box {
+    background: #F5F5F7;
+    padding: 20px;
+    padding-top: 50px;
+    margin: 20px auto;
+    width: 666px;
+    border-radius: 1px;
+    font-family: "Anonymous Pro", monospace;
+    border-color: #000000;
+    color: #000000;
+}
+
+button {
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    background-color: rgba(0,0,0,var(--tw-bg-opacity));
+    border-radius: 16px;
+    color: rgba(255,255,255,var(--tw-text-opacity));
+    font-size: 18px;
+    line-height: 1.1;
+    padding: .75rem 1.25rem;
+    text-align: center;
+    -webkit-transition-duration: .15s;
+    transition-duration: .15s;
+    -webkit-transition-property: all;
+    transition-property: all;
+    font-family: "Anonymous Pro", monospace;
+    cursor: pointer;
+    -webkit-transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-timing-function: cubic-bezier(.4,0,.2,1)
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+
+.workout-box {
+    border: 2px solid #333;
+    padding: 20px;
+    margin: 20px auto;
+    text-align: center;
+    max-width: 400px;
+    border-radius: 10px;
+    background-color:#ffffff;
+    font-family: "Anonymous Pro", monospace;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.workout-info {
+    text-align: center;
+    padding-bottom: 10px;
+    font-family: "Anonymous Pro", monospace;
+}
+
+.muscle-tag {
+    background-color: #000000;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-family: "Anonymous Pro", monospace;
+}
+
+.workout-info h2 {
+    margin: 5px 0;
+    font-size: 24px;
+    color: #333;
+    font-family: "Anonymous Pro", monospace;
+}
+
+.workout-info p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #777;
+    font-family: "Anonymous Pro", monospace;
+}
+
+.workout-main h2 {
+    margin-top: 20px;
+    font-size: 22px;
+    font-family: "Anonymous Pro", monospace;
+}
+
+.workout-gif {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.workout-reps {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    font-family: "Anonymous Pro", monospace;
+}
+
+#completeButton {
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    background-color: rgba(0,0,0,var(--tw-bg-opacity));
+    border-radius: 16px;
+    color: rgba(255,255,255,var(--tw-text-opacity));
+    font-family: "Anonymous Pro", monospace;
+    font-size: 18px;
+    line-height: 1.1;
+    padding: .75rem 1.25rem;
+    text-align: center;
+    -webkit-transition-duration: .15s;
+    transition-duration: .15s;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -webkit-transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-timing-function: cubic-bezier(.4,0,.2,1)
+}
+
+#completeButton:hover {
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    background-color: rgba(0,0,0,var(--tw-bg-opacity));
+    border-radius: 16px;
+    color: rgba(255,255,255,var(--tw-text-opacity));
+    font-family: "Anonymous Pro", monospace;
+    font-size: 18px;
+    line-height: 1.1;
+    padding: .75rem 1.25rem;
+    text-align: center;
+    -webkit-transition-duration: .15s;
+    transition-duration: .15s;
+    -webkit-transition-property: all;
+    transition-property: all;
+    cursor: pointer;
+    -webkit-transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-timing-function: cubic-bezier(.4,0,.2,1)
+}
+
+#completeButton:focus {
+    background: #0056b3;
+    
+}
+
+#completeButton:hover:not(:disabled) {
+    --tw-bg-opacity: 1;
+    background-color: rgba(36,36,36,var(--tw-bg-opacity))
+}
+
+.workout-complete {
+    padding-top: 40px;
+    text-align: center;
+    margin: 650px;
+    width: 550px;
+    height: 300px;
+    color: #000000;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-family: "Anonymous Pro", monospace;
+    border: 2px solid #333;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.workout-complete h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #121212;
+    font-family: Helvetica;
+}
+
+.workout-complete p {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-family: "Anonymous Pro", monospace;
+}
+
+#goBackButton {
+    padding: 10px 20px;
+    font-size: 18px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#goBackButton:hover {
+    background: #0056b3;
+}

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Archivo+Black&family=Comfortaa:wght@300..700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
+    <title>Set Go</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="overlay"></div>
+    <header>
+        <nav class="navigation">
+            <div class="nav-left"></div>
+            <div class="nav-center">
+                <img src="/assets/setgo.png" alt="Logo" class="logo">
+            </div>
+            <div class="nav-right">
+              <button class="btnLogin-popup" id="loginBtn">Login</button>
+              <button class="btnLogin-popup btn-logout">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="wrapper" id="authWrapper">
+      <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+
+      <div class="form-box login" id="loginForm">
+        <h2>Login</h2>
+        <form id="login-form">
+          <div class="input-box">
+            <span class="icon"><ion-icon name="mail"></ion-icon></span>
+            <input type="email" id="login-email" required>
+            <label for="login-email">Email</label>
+          </div>
+          <div class="input-box">
+            <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+            <input type="password" id="login-password" required>
+            <label for="login-password">Password</label>
+          </div>
+          <div class="remember-forgot">
+            <label><input type="checkbox"> Remember me</label>
+            <a href="#">Forgot Password?</a>
+          </div>
+          <button type="submit" class="btn">Login</button>
+          <div class="login-register">
+            <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+          </div>
+        </form>
+      </div> 
+
+      <div class="form-box register" id="registerForm">
+        <h2>Registration</h2>
+        <form id="register-form">
+          <div class="input-box">
+            <span class="icon"><ion-icon name="person"></ion-icon></span>
+            <input type="text" id="register-username" required>
+            <label for="register-username">Username</label>
+          </div>
+          <div class="input-box">
+            <span class="icon"><ion-icon name="mail"></ion-icon></span>
+            <input type="email" id="register-email" required>
+            <label for="register-email">Email</label>
+          </div>
+          <div class="input-box">
+            <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+            <input type="password" id="register-password" required>
+            <label for="register-password">Password</label>
+          </div>
+          <div class="remember-forgot">
+            <label><input type="checkbox" id="termsCheckbox" required> I agree to the terms & conditions</label>
+          </div>
+          <button type="submit" class="btn">Register</button>
+          <div class="login-register">
+            <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+          </div>
+        </form>
+      </div> 
+    </div>
+
+    <main>
+        <h2 class="text-box">CUSTOMIZE YOUR WORKOUT</h2>
+        <form id="workoutForm" class ="workoutForm">
+            <label for="time">Workout Duration (Minutes):</label>
+            <input type="number" id="workoutDurationInput" placeholder="Enter workout duration">
+            <br><br>
+            <br><br>
+
+            <label for="muscle">Select Muscle Group:</label>
+            <select id="muscle">
+                <option value="chest">Chest</option>
+                <option value="biceps">Biceps</option>
+                <option value="triceps">Triceps</option>
+                <option value="back">Back</option>
+            </select>
+            <br><br>
+            <br><br>
+
+            <label>Equipment:</label>
+            <input type="checkbox" id="dumbbells" value="Dumbbells"> Dumbbells
+            <input type="checkbox" id="barbell" value="Barbell"> Barbell
+            <input type="checkbox" id="bodyweight" value="Bodyweight"> Bodyweight
+
+            <br><br>
+            <br><br>
+            <button type="submit" id="startWorkoutBtn" disabled >Generate Workout</button>
+        </form>
+        <div id="output" class="output hide"></div>
+    </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+          if (typeof firebase === "undefined") {
+            console.error("Firebase SDK not loaded. Check script order.");
+            return;
+          }
+  
+          try {
+            const response = await fetch("/firebase-config.json");
+            if (!response.ok) throw new Error("Failed to load Firebase config");
+            const firebaseConfig = await response.json();
+            
+            firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+            const db = firebase.firestore();
+  
+            console.log("✅ Firebase initialized successfully.");
+  
+            document.getElementById("login-form").addEventListener("submit", function (event) {
+              event.preventDefault();
+              const email = document.getElementById("login-email").value;
+              const password = document.getElementById("login-password").value;
+  
+              auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                  console.log("✅ Login successful", userCredential.user);
+                })
+                .catch((error) => {
+                  console.error("❌ Login error:", error.message);
+                });
+            });
+  
+            document.getElementById("register-form").addEventListener("submit", function (event) {
+              event.preventDefault();
+              const email = document.getElementById("register-email").value;
+              const password = document.getElementById("register-password").value;
+  
+              auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                  console.log("✅ Registration successful", userCredential.user);
+                })
+                .catch((error) => {
+                  console.error("❌ Registration error:", error.message);
+                });
+            });
+  
+          } catch (error) {
+            console.error("❌ Failed to load Firebase config:", error);
+          }
+
+          
+
+          document.getElementById("workoutForm")?.addEventListener("submit", function (e) {
+          e.preventDefault();
+    
+           const muscle = document.getElementById("muscle").value;
+           const duration = document.getElementById("workoutDurationInput")?.value; 
+
+           if (!muscle) {
+               alert("Please select a muscle group.");
+               return;
+              }
+
+               localStorage.setItem("selectedMuscle", muscle);
+
+               if (duration && !isNaN(duration)) {
+               localStorage.setItem("workoutDuration", duration);
+               console.log("💾 Saved Workout Duration:", duration);
+              } else {
+                 console.warn("⚠️ Invalid workout duration. Using default (30 min).");
+                 localStorage.setItem("workoutDuration", "30");
+                }
+               window.location.href = "workout.html";
+            });
+        });
+      </script>
+
+      <script src="script.js"></script>
+
+</body>
+</html>
