@@ -6,8 +6,6 @@ const cors = require("cors");
 const admin = require("firebase-admin");
 const path = require("path");
 
-const PORT = process.env.PORT || 5000;
-
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -32,6 +30,17 @@ app.use(express.static("public"));
 app.use(cors({ origin: "http://localhost:5000" }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/firebase-config", (req, res) => {
+  res.json({
+      apiKey: process.env.FIREBASE_API_KEY,
+      authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+      messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+      appId: process.env.FIREBASE_APP_ID,
+  });
+});
 
 if (!admin.apps.length) {
   admin.initializeApp({
@@ -124,6 +133,7 @@ app.post("/save-data", async (req, res) => {
   }
 });
 
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
