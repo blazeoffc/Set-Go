@@ -126,7 +126,7 @@
           }
   
           try {
-            const response = await fetch("/firebase-config.json");
+            const response = await fetch("/firebase-config");
             if (!response.ok) throw new Error("Failed to load Firebase config");
             const firebaseConfig = await response.json();
             

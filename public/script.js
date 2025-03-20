@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     let firebaseConfig;
     try {
         console.log("Fetching Firebase config...");
-        const response = await fetch("/firebase-config.json");
+        const response = await fetch("/firebase-config");
         if (!response.ok) throw new Error("Failed to load Firebase config");
 
         firebaseConfig = await response.json();
